@@ -1,97 +1,83 @@
-import java.util.Random;
-import java.util.Scanner;
+import random
 
-public class ComplexRandomGame {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
-        
-        int score = 0;
-        int maxAttempts = 3;
-        
-        System.out.println("Добро пожаловать в сложную рандомную игру!");
-        System.out.println("Ваша задача - выполнить серию заданий и набрать максимальное количество очков.");
+def main():
+    score = 0
+    max_attempts = 3
 
-        while (true) {
-            int taskType = random.nextInt(3); // Генерируем тип задания (0, 1 или 2)
+    print("Добро пожаловать в сложную рандомную игру!")
+    print("Ваша задача - выполнить серию заданий и набрать максимальное количество очков.")
 
-            if (taskType == 0) {
-                // Задание 1: Угадайте случайное число
-                int targetNumber = random.nextInt(10) + 1;
-                System.out.println("Задание 1: Угадайте число от 1 до 10.");
-                int attempts = 0;
+    while True:
+        task_type = random.randint(0, 2)  # Генерируем тип задания (0, 1 или 2)
 
-                while (attempts < maxAttempts) {
-                    System.out.print("Попытка " + (attempts + 1) + ": ");
-                    int guess = scanner.nextInt();
-                    attempts++;
+        if task_type == 0:
+            # Задание 1: Угадайте случайное число
+            target_number = random.randint(1, 10)
+            print("Задание 1: Угадайте число от 1 до 10.")
+            attempts = 0
 
-                    if (guess == targetNumber) {
-                        System.out.println("Правильно! Вы заработали 10 очков.");
-                        score += 10;
-                        break;
-                    } else {
-                        System.out.println("Неправильно. Попробуйте еще.");
-                    }
-                }
-            } else if (taskType == 1) {
-                // Задание 2: Генерация случайной операции
-                int number1 = random.nextInt(20);
-                int number2 = random.nextInt(10);
-                char[] operators = {'+', '-', '*'};
-                char operator = operators[random.nextInt(3)];
-                int result;
+            while attempts < max_attempts:
+                try:
+                    guess = int(input(f"Попытка {attempts + 1}: "))
+                except ValueError:
+                    print("Введите целое число.")
+                    continue
 
-                System.out.println("Задание 2: Вычислите " + number1 + " " + operator + " " + number2);
-                System.out.print("Ваш ответ: ");
-                int userAnswer = scanner.nextInt();
+                attempts += 1
 
-                switch (operator) {
-                    case '+':
-                        result = number1 + number2;
-                        break;
-                    case '-':
-                        result = number1 - number2;
-                        break;
-                    case '*':
-                        result = number1 * number2;
-                        break;
-                    default:
-                        result = 0; // Ошибка, но не должно возникать
-                }
+                if guess == target_number:
+                    print("Правильно! Вы заработали 10 очков.")
+                    score += 10
+                    break
+                else:
+                    print("Неправильно. Попробуйте еще.")
+        elif task_type == 1:
+            # Задание 2: Генерация случайной операции
+            number1 = random.randint(0, 19)
+            number2 = random.randint(0, 9)
+            operators = ['+', '-', '*']
+            operator = random.choice(operators)
+            result = None
 
-                if (userAnswer == result) {
-                    System.out.println("Правильно! Вы заработали 20 очков.");
-                    score += 20;
-                } else {
-                    System.out.println("Неправильно. Правильный ответ: " + result);
-                }
-            } else {
-                // Задание 3: Генерация случайной строковой последовательности
-                String[] words = {"яблоко", "банан", "вишня", "апельсин", "груша"};
-                String randomWord = words[random.nextInt(words.length)];
+            print(f"Задание 2: Вычислите {number1} {operator} {number2}")
+            try:
+                user_answer = int(input("Ваш ответ: "))
+            except ValueError:
+                print("Введите целое число.")
+                continue
 
-                System.out.println("Задание 3: Угадайте загаданное слово из фруктов.");
-                System.out.print("Ваш ответ: ");
-                String userGuess = scanner.next();
+            if operator == '+':
+                result = number1 + number2
+            elif operator == '-':
+                result = number1 - number2
+            elif operator == '*':
+                result = number1 * number2
 
-                if (userGuess.equalsIgnoreCase(randomWord)) {
-                    System.out.println("Правильно! Вы заработали 15 очков.");
-                    score += 15;
-                } else {
-                    System.out.println("Неправильно. Правильный ответ: " + randomWord);
-                }
-            }
+            if user_answer == result:
+                print("Правильно! Вы заработали 20 очков.")
+                score += 20
+            else:
+                print(f"Неправильно. Правильный ответ: {result}")
+        else:
+            # Задание 3: Генерация случайной строковой последовательности
+            words = ["яблоко", "банан", "вишня", "апельсин", "груша"]
+            random_word = random.choice(words)
 
-            System.out.println("Ваши очки: " + score);
+            print("Задание 3: Угадайте загаданное слово из фруктов.")
+            user_guess = input("Ваш ответ: ")
 
-            System.out.print("Хотите продолжить игру? (да/нет): ");
-            String playAgain = scanner.next();
+            if user_guess.lower() == random_word:
+                print("Правильно! Вы заработали 15 очков.")
+                score += 15
+            else:
+                print(f"Неправильно. Правильный ответ: {random_word}")
 
-            if (!playAgain.equalsIgnoreCase("да")) {
-                System.out.println("Спасибо за игру! Ваши общие очки: " + score);
-                break;
-            }
-        }
-    }
-}
+        print(f"Ваши очки: {score}")
+
+        play_again = input("Хотите продолжить игру? (да/нет): ")
+        if play_again.lower() != "да":
+            print(f"Спасибо за игру! Ваши общие очки: {score}")
+            break
+
+if __name__ == "__main__":
+    main()
