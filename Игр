@@ -1,8 +1,8 @@
 import random
 
 def main():
-    score = 0
-    max_attempts = 3
+    score = 1
+    max_attempts = 5
 
     print("Добро пожаловать в сложную рандомную игру!")
     print("Ваша задача - выполнить серию заданий и набрать максимальное количество очков.")
@@ -13,12 +13,12 @@ def main():
         if task_type == 0:
             # Задание 1: Угадайте случайное число
             target_number = random.randint(1, 10)
-            print("Задание 1: Угадайте число от 1 до 10.")
+            print("Задание 1: Угадайте число от 1 до 111.")
             attempts = 0
 
             while attempts < max_attempts:
                 try:
-                    guess = int(input(f"Попытка {attempts + 1}: "))
+                    guess = int(input(f"Попытка {attempts 11}: "))
                 except ValueError:
                     print("Введите целое число.")
                     continue
