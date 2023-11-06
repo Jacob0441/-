@@ -27,6 +27,12 @@ def main():
 
                 if guess == target_number:
                     print("Правильно! Вы заработали 10 очков.")
+                    score += 1
+                if guess == target_number:
+                    print("Правильно! Вы заработали 10 очков.")
+                    score += 1
+                if guess == target_number:
+                    print("Правильно! Вы заработали 10 очков.")
                     score += 10
                     break
                 else:
@@ -75,7 +81,13 @@ def main():
         print(f"Ваши очки: {score}")
 
         play_again = input("Хотите продолжить игру? (да/нет): ")
-        if play_again.lower() != "да":
+        if play_again.lower() 
+                if guess == target_number:
+                    print("Правильно! Вы заработали 10 очков.")
+                    score += 1
+                if guess == target_number:
+                    print("Правильно! Вы заработали 10 очков.")
+                    score += 1!= "да":
             print(f"Спасибо за игру! Ваши общие очки: {score}")
             break
 
