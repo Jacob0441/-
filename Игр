@@ -93,3 +93,71 @@ def main():
 
 if __name__ == "__main__":
     main()
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Lottery {
+    public static void main(String[] args) {
+        // Создаем массив для хранения чисел лотерейного билета
+        int[] lotteryNumbers = new int[6];
+
+        // Заполняем массив случайными числами от 1 до 49
+        generateLotteryNumbers(lotteryNumbers);
+
+        // Выводим на экран числа лотерейного билета
+        System.out.println("Числа вашего лотерейного билета: " + Arrays.toString(lotteryNumbers));
+
+        // Получаем числа, выбранные пользователем
+        int[] userNumbers = getUserNumbers();
+
+        // Выводим на экран числа, выбранные пользователем
+        System.out.println("Ваши числа: " + Arrays.toString(userNumbers));
+
+        // Проверяем совпадение чисел и определяем выигрыш
+        int matchedNumbers = countMatchingNumbers(lotteryNumbers, userNumbers);
+        System.out.println("Вы угадали " + matchedNumbers + " чисел!");
+
+        // Поздравляем с выигрышем, если угадано хотя бы 3 числа
+        if (matchedNumbers >= 3) {
+            System.out.println("Поздравляем, вы выиграли!");
+        } else {
+            System.out.println("Увы, вы проиграли. Попробуйте еще раз!");
+        }
+    }
+
+    // Метод для генерации случайных чисел для лотерейного билета
+    private static void generateLotteryNumbers(int[] numbers) {
+        Random random = new Random();
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = random.nextInt(49) + 1; // Генерируем случайное число от 1 до 49
+        }
+    }
+
+    // Метод для получения чисел, выбранных пользователем
+    private static int[] getUserNumbers() {
+        Scanner scanner = new Scanner(System.in);
+        int[] userNumbers = new int[6];
+
+        System.out.println("Введите 6 чисел от 1 до 49:");
+        for (int i = 0; i < userNumbers.length; i++) {
+            userNumbers[i] = scanner.nextInt();
+        }
+
+        return userNumbers;
+    }
+
+    // Метод для подсчета количества совпавших чисел
+    private static int countMatchingNumbers(int[] arr1, int[] arr2) {
+        int count = 0;
+        for (int num1 : arr1) {
+            for (int num2 : arr2) {
+                if (num1 == num2) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
